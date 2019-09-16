@@ -1,0 +1,20 @@
+<nav class="navigate-admin">
+  <a class="navigate-admin__descr" routerLink="/">
+    Angular Admin
+  </a>
+  <ul class="navigate-admin__list">
+    <li routerLinkActive="active">
+      <a [routerLink]="['/admin', 'dashboard']" >Dashboard</a>
+    </li>
+    <li >
+      <a  [routerLink]="['/admin', 'create']" >Create</a>
+    </li>
+    <li>
+      <a href="#"  (click)="logout($event)">Logout</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

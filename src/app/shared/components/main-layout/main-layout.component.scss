@@ -1,0 +1,15 @@
+
+.navigate {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 60px;
+  background-image: linear-gradient(to right top, #71b3e5, #65aae5, #5ba2e5, #5399e4, #4f8fe3, #3f92e4, #2b94e4, #0097e4, #00a4df, #00aed4, #00b7c5, #3bbeb6);
+}
+
+.navigate__descr {
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 15px;
+  margin-left: 50px;
+}
