@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {PostsService} from '../../shared/posts.service';
+import {Subscription} from 'rxjs';
+import {Post} from '../shared/components/inrefaces';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardPageComponent implements OnInit {
 
-  constructor() { }
+  posts: any;
+  unSub: Subscription;
+
+  constructor(private postService: PostsService) { }
 
   ngOnInit() {
+   this.unSub =  this.postService.getAll().subscribe(posts => {
+      this.posts = posts;
+    });
   }
 
 }

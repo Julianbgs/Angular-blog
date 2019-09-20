@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../shared/components/inrefaces';
 import {AuthService} from '../shared/services/auth.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Params, Router, RouterLinkActive} from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -12,11 +12,20 @@ import {Router} from '@angular/router';
 export class LoginPageComponent implements OnInit {
 
   form: FormGroup;
+  infoMessage: string;
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(public auth: AuthService, private router: Router, private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
-    this.form = new  FormGroup({
+    this.route.queryParams.subscribe((params: Params) => {
+      if (params['failLogin']) {
+        this.infoMessage = 'Пожалуйста залогинтесь';
+      } else if (params['authExp']) {
+        this.infoMessage = 'Срок сессии истек, залогинтесь снова';
+      }
+    });
+    this.form = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(6)])
     });
@@ -29,8 +38,7 @@ export class LoginPageComponent implements OnInit {
 
     const user: User = {
       email: this.form.value.email,
-      password: this.form.value.password,
-      returnSecureToken: true
+      password: this.form.value.password
     };
 
     this.auth.login(user).subscribe(() => {

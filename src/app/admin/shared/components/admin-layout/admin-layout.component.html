@@ -2,7 +2,7 @@
   <a class="navigate-admin__descr" routerLink="/">
     Angular Admin
   </a>
-  <ul class="navigate-admin__list">
+  <ul class="navigate-admin__list" *ngIf="auth.isAuthenticated()">
     <li routerLinkActive="active">
       <a [routerLink]="['/admin', 'dashboard']" >Dashboard</a>
     </li>

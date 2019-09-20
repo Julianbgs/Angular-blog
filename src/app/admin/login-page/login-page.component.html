@@ -1,4 +1,13 @@
 <form class="card mt-5" [formGroup]="form" (ngSubmit)="submit()">
+
+  <div class="alert alert-danger" *ngIf="auth.error$ | async as error">
+    {{error}}
+  </div>
+
+  <div class="alert alert-warning" *ngIf="infoMessage">
+    {{infoMessage}}
+  </div>
+
   <h2>Введите данные пользователя</h2>
   <div class="form-group">
     <label for="email">Email: </label>
@@ -18,5 +27,5 @@
       symbols. Now it {{form.get('password').errors.minlength.actualLength}}</small>
   </div>
   </div>
-  <button type="submit" class="btn btn-dark" [disabled]="form.invalid">Sign in</button>
+  <button type="submit" class="btn btn-dark" [disabled]="form.invalid || isSubmitted">Sign in</button>
 </form>
