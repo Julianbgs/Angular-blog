@@ -1,6 +1,6 @@
 <div *ngIf="posts.length; else loading">
   <div class="form-group mt-5">
-    <input type="text" placeholder="Search post" class="form-control">
+    <input type="text" placeholder="Search post" class="form-control" [(ngModel)]="searchModel">
   </div>
 <table>
   <thead>
@@ -13,13 +13,13 @@
     </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let post of posts; let idx = index">
+  <tr *ngFor="let post of posts | searchPipe:searchModel; let idx = index">
     <td>{{idx +1}}</td>
     <td>{{post.author}}</td>
     <td>{{post.title}}</td>
     <td>{{post.date | date:"medium"}}</td>
     <td>
-      <button class="btn btn-dark" [routerLink]="['/admin', 'post', post.id, 'edit']"> Open</button>
+      <button class="btn btn-dark" [routerLink]="['/admin', 'post', post.id, 'edit']"> Edit</button>
       <a (click)="remove(post.id)"> Remove</a>
     </td>
   </tr>

@@ -1,1 +1,22 @@
-<p>edit-page works!</p>
+<div *ngIf="form; else loading">
+  <form [formGroup]="form" (ngSubmit)="submit()"class="mt-5">
+    <div class="form-group">
+      <label for="title">Post title</label>
+      <input type="text" id="title" name="title" class="form-control" formControlName="title" [ngClass]="{invalid: form.get('title').touched && form.get('title').invalid}">
+      <div class="validation" *ngIf="form.get('title').touched && form.get('title').invalid">
+        <small class="danger" *ngIf="form.get('title').errors.required">Field title may not be as empty</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Post content</label>
+      <quill-editor formControlName="content"></quill-editor>
+    </div>
+
+    <button type="submit" class="btn btn-dark">Change and send</button>
+  </form>
+</div>
+
+<ng-template #loading>
+    <p class="mt-5">Loading...</p>
+</ng-template>
