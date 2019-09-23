@@ -1,8 +1,9 @@
 <div class="card mt-3">
-  <p>Post title</p>
-  <small>Blagis</small>
+  <p>{{post.title}}</p>
+  <small>{{post.author}}</small>
+  <small>{{post.date | date: "dd.MM.yyyy"}}</small>
   <button
-    [routerLink]="['/post', 123]"
+    [routerLink]="['/post', post.id]"
     class="btn btn-dark"
   >Open</button>
 </div>
