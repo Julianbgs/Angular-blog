@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PostsService} from '../../shared/posts.service';
 import {Subscription} from 'rxjs';
 import {Post} from '../shared/components/inrefaces';
@@ -8,9 +8,9 @@ import {Post} from '../shared/components/inrefaces';
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.scss']
 })
-export class DashboardPageComponent implements OnInit {
+export class DashboardPageComponent implements OnInit, OnDestroy {
 
-  posts: any;
+  posts: Post[] = [];
   unSub: Subscription;
 
   constructor(private postService: PostsService) { }
@@ -21,4 +21,13 @@ export class DashboardPageComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    if (this.unSub) {
+      this.unSub.unsubscribe();
+    }
+  }
+
+  remove(id: string) {
+
+  }
 }
